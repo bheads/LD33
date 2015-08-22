@@ -9,10 +9,14 @@ var eSplash
 var extents
 
 
+var jBubble
+
+
 func _ready():
 	set_process(true)
 	set_process_input(true)
 	eSplash = load("res://scn/effects/splash.scn")
+	jBubble = load("res://scn/junk/bub.scn")
 	extents = get_shape(0).get_extents()
 	updateSize()
 	
@@ -95,6 +99,18 @@ func _process(delta):
 		if(-1 < v.y && v.y <= 1):
 			nv.y = 0
 		set_linear_velocity(nv) 
+	
+	if(inTheAir == 0):
+		if(randf() * 1000 > 960):
+			print("Bubble time")
+			var p = get_global_pos()
+			var b = jBubble.instance()
+			b.show()
+			b.set_global_pos(p)
+			b.bscale = scale
+			b.decay = 0.2 * scale
+			get_parent().add_child(b)
+
 	
 	#print(get_linear_velocity())
 
