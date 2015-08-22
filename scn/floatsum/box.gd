@@ -2,13 +2,13 @@
 extends RigidBody2D
 
 var inTheAir = -1
-var grav = 5
+var grav = 2
 var eSplash
 var eExploder
 
 func _ready():
 	set_process(true)
-	set_mass(10 + randf() * 190)
+	set_mass(100 + randf() * 190)
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
 	# find a way to scale the splash
@@ -22,7 +22,7 @@ func _process(delta):
 	# splash
 	if(inTheAir != 0 && p.y > 0):
 		inTheAir = 0
-		if(abs(v.y) >= 50):
+		if(abs(v.y) >= 100):
 			var s = eSplash.instance()
 			s.show()
 			s.set_global_pos(Vector2(p.x, 10))
@@ -32,7 +32,7 @@ func _process(delta):
 
 	if(p.y > 0.001):
 		# in the water
-		set_gravity_scale(-grav)
+		set_gravity_scale(-grav * 2)
 		# slow down
 		var nv = Vector2()
 		var xFrict = max(abs(v.x / 3), 10)
@@ -56,12 +56,15 @@ func _process(delta):
 	
 	
 func _integrate_forces(state):
+	var lv = get_linear_velocity()
 	for i in range(0, state.get_contact_count()):
 		var obj = state.get_contact_collider_object(i)
 		var v = state.get_contact_collider_velocity_at_pos(i)
-		var v2 = v - get_linear_velocity()
-		var f = (abs(v2.x) + abs(v2.y)) * get_mass()
-		if(f > 50000):
+		var dX = abs(lv.x - v.x)
+		var dY = abs(lv.y - v.y)
+		var f = (dX + dY) / 500
+		print(f)
+		if(f > 1.5):
 			var s = eExploder.instance()
 			s.show()
 			s.set_global_pos(get_global_pos())

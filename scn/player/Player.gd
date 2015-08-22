@@ -102,7 +102,7 @@ func _process(delta):
 	
 	if(inTheAir == 0):
 		if(randf() * 1000 > 960):
-			print("Bubble time")
+			#print("Bubble time")
 			var p = get_global_pos()
 			var b = jBubble.instance()
 			b.show()
