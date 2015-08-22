@@ -1,6 +1,7 @@
 
 extends Node2D
 
+var life = 8
 
 func _ready():
 	#print("starting: ", get_global_pos(), "  p: ", get_parent().get_name())
@@ -17,8 +18,11 @@ func _ready():
 	get_child(2).set_emitting(true)
 	get_child(2).pre_process(4)
 	
-	get_child(3).start()
+	get_node("SamplePlayer2D").play("splash", false)
+	set_fixed_process(true)
 
-func _on_Timer_timeout():
-	self.queue_free()
-	#print("removing")
+func _fixed_process(delta):
+	life -= delta
+	if(life <= 0):
+		self.queue_free()
+		print("removing")
