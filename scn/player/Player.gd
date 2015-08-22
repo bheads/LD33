@@ -4,12 +4,33 @@ extends RigidBody2D
 var inTheAir = -1
 var maxAccel = 100
 var waterFriction = 10
+var scale = 0.4
 var eSplash
+var extents
+
 
 func _ready():
 	set_process(true)
+	set_process_input(true)
 	eSplash = load("res://scn/effects/splash.scn")
+	extents = get_shape(0).get_extents()
+	updateSize()
 	
+func _input(ev):
+	if(ev.type == InputEvent.KEY && ev.scancode == KEY_G):
+		scale = clamp(scale + 0.05, 0.4, 2)
+		updateSize()
+	if(ev.type == InputEvent.KEY && ev.scancode == KEY_S):
+		scale = clamp(scale - 0.05, 0.4, 2)
+		updateSize()
+	
+	
+	# update this for leveling up
+func updateSize():
+	get_node("Sprite").set_scale(Vector2(scale, scale))
+	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
+	set_mass(scale * 150)
+	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 
 func _process(delta):
 	# simple floating
