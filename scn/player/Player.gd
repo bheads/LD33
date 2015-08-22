@@ -39,7 +39,16 @@ func _process(delta):
 	var g = get_global_mouse_pos()
 	var dY = p.y - g.y
 	var dX = g.x - p.x
-	set_rot(deg2rad(atan2(dY, dX) * 180 / PI))
+	var angle = atan2(dY, dX) * 180 / PI
+	while(angle > 360):
+		angle -= 360;
+	while(angle < 0):
+		angle += 360
+	set_rot(deg2rad(angle))
+	if(90 < angle && angle < 270):
+		get_node("Sprite").set_flip_v(true)
+	else:
+		get_node("Sprite").set_flip_v(false)
 
 	
 
