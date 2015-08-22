@@ -4,9 +4,11 @@ extends RigidBody2D
 var inTheAir = -1
 var maxAccel = 100
 var waterFriction = 10
+var eSplash
 
 func _ready():
 	set_process(true)
+	eSplash = load("res://scn/effects/splash.scn")
 	
 
 func _process(delta):
@@ -17,6 +19,13 @@ func _process(delta):
 		inTheAir = 0
 		var v = get_linear_velocity()
 		set_linear_velocity(Vector2(v.x, v.y / 2)) # hitting the water slows you down
+		# Create spash effect
+		if(abs(v.y) >= 50):
+			print("Splash!")
+			var s = eSplash.instance()
+			s.show()
+			s.set_global_pos(Vector2(get_global_pos().x, 10))
+			get_parent().add_child(s)
 		print("swimming mode")
 	elif(inTheAir != 1 && get_global_pos().y <= 0):
 		set_gravity_scale(10)
@@ -57,6 +66,6 @@ func _process(delta):
 			nv.y = 0
 		set_linear_velocity(nv) 
 	
-	print(get_linear_velocity())
+	#print(get_linear_velocity())
 
 
