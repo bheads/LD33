@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="TileSet" subresource_count="29" version="1.1" version_name="Godot Engine v1.1.stable.d3b42e41b0">
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<ext_resource path="res://scn/tileset/joe-rocks.png" type="Texture"></ext_resource>
+	<resource type="ConvexPolygonShape2D" path="local://1">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-32.7542, 32.567, -31.9636, -31.9954, 32.3353, -31.7319, 32.0718, 32.3035 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://2">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="6"> 			-32, -32, 32, -32, 32.1113, 14.1462, 28.0683, 25.5619, 18.5552, 31.9832, -32, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://3">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="6"> 			-32, 32, -32, -32, 16, -32, 32, -16, 32, 16, 24, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://4">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-32, 24, -32, -24, 32, -24, 32, 24 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://5">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="5"> 			32, -24, 32, 16, 24, 24, -16, -8, -24, -24 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://6">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-32, -32, 32, -32, 32, 32, -32, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://7">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="6"> 			32, -32, 32, 16, 16, 24, -16, 24, -32, 16, -32, -32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://8">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="5"> 			32, -32, 32, 32, -16, 24, -24, 16, -32, -32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://9">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="5"> 			32, 32, -32, 32, -32, -16, -24, -32, 32, -32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://10">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-32, 32, -32, -32, 32, -32, 32, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://11">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="6"> 			32.8802, 32, -31.1198, 32, -31.1198, -24, -23.1198, -32, 16.8802, -32, 32.8802, -24 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://12">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="5"> 			-32, 32, -32, -32, 24, -32, 32, -24, 32, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://13">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="6"> 			-32, -32, 16, -32, 24, -24, 24, 0, 16, 32, -32, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://14">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-32, 16, -32, -24, 24, -24, 24, 16 </vector2_array>
+
+	</resource>
+	<main_resource>
+		<string name="0/name"> "Full" </string>
+		<resource name="0/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="0/tex_offset"> 0, 0 </vector2>
+		<resource name="0/material"></resource>		<rect2 name="0/region"> 64, 0, 64, 64 </rect2>
+		<vector2 name="0/occluder_offset"> 32, 32 </vector2>
+		<resource name="0/occluder"></resource>		<vector2 name="0/navigation_offset"> 32, 32 </vector2>
+		<resource name="0/navigation"></resource>		<vector2 name="0/shape_offset"> 32, 32 </vector2>
+		<array name="0/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://1">  </resource>
+		</array>
+		<string name="1/name"> "TopLeftCorner" </string>
+		<resource name="1/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="1/tex_offset"> 0, 0 </vector2>
+		<resource name="1/material"></resource>		<rect2 name="1/region"> 128, 0, 64, 64 </rect2>
+		<vector2 name="1/occluder_offset"> 32, 32 </vector2>
+		<resource name="1/occluder"></resource>		<vector2 name="1/navigation_offset"> 32, 32 </vector2>
+		<resource name="1/navigation"></resource>		<vector2 name="1/shape_offset"> 32, 32 </vector2>
+		<array name="1/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://2">  </resource>
+		</array>
+		<string name="2/name"> "Top" </string>
+		<resource name="2/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="2/tex_offset"> 0, 0 </vector2>
+		<resource name="2/material"></resource>		<rect2 name="2/region"> 192, 0, 64, 64 </rect2>
+		<vector2 name="2/occluder_offset"> 32, 32 </vector2>
+		<resource name="2/occluder"></resource>		<vector2 name="2/navigation_offset"> 32, 32 </vector2>
+		<resource name="2/navigation"></resource>		<vector2 name="2/shape_offset"> 32, 32 </vector2>
+		<array name="2/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://7">  </resource>
+		</array>
+		<string name="3/name"> "TopRightCorner" </string>
+		<resource name="3/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="3/tex_offset"> 0, 0 </vector2>
+		<resource name="3/material"></resource>		<rect2 name="3/region"> 256, 0, 64, 64 </rect2>
+		<vector2 name="3/occluder_offset"> 32, 32 </vector2>
+		<resource name="3/occluder"></resource>		<vector2 name="3/navigation_offset"> 32, 32 </vector2>
+		<resource name="3/navigation"></resource>		<vector2 name="3/shape_offset"> 32, 32 </vector2>
+		<array name="3/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://8">  </resource>
+		</array>
+		<string name="4/name"> "Right" </string>
+		<resource name="4/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="4/tex_offset"> 0, 0 </vector2>
+		<resource name="4/material"></resource>		<rect2 name="4/region"> 320, 0, 64, 64 </rect2>
+		<vector2 name="4/occluder_offset"> 32, 32 </vector2>
+		<resource name="4/occluder"></resource>		<vector2 name="4/navigation_offset"> 32, 32 </vector2>
+		<resource name="4/navigation"></resource>		<vector2 name="4/shape_offset"> 32, 32 </vector2>
+		<array name="4/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://9">  </resource>
+		</array>
+		<string name="5/name"> "Full2" </string>
+		<resource name="5/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="5/tex_offset"> 0, 0 </vector2>
+		<resource name="5/material"></resource>		<rect2 name="5/region"> 384, 0, 64, 64 </rect2>
+		<vector2 name="5/occluder_offset"> 32, 32 </vector2>
+		<resource name="5/occluder"></resource>		<vector2 name="5/navigation_offset"> 32, 32 </vector2>
+		<resource name="5/navigation"></resource>		<vector2 name="5/shape_offset"> 32, 32 </vector2>
+		<array name="5/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://10">  </resource>
+		</array>
+		<string name="6/name"> "Bottom" </string>
+		<resource name="6/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="6/tex_offset"> 0, 0 </vector2>
+		<resource name="6/material"></resource>		<rect2 name="6/region"> 448, 0, 64, 64 </rect2>
+		<vector2 name="6/occluder_offset"> 32, 32 </vector2>
+		<resource name="6/occluder"></resource>		<vector2 name="6/navigation_offset"> 32, 32 </vector2>
+		<resource name="6/navigation"></resource>		<vector2 name="6/shape_offset"> 32, 32 </vector2>
+		<array name="6/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://11">  </resource>
+		</array>
+		<string name="7/name"> "BottomLeftCorner" </string>
+		<resource name="7/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="7/tex_offset"> 0, 0 </vector2>
+		<resource name="7/material"></resource>		<rect2 name="7/region"> 0, 64, 64, 64 </rect2>
+		<vector2 name="7/occluder_offset"> 32, 32 </vector2>
+		<resource name="7/occluder"></resource>		<vector2 name="7/navigation_offset"> 32, 32 </vector2>
+		<resource name="7/navigation"></resource>		<vector2 name="7/shape_offset"> 32, 32 </vector2>
+		<array name="7/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://12">  </resource>
+		</array>
+		<string name="8/name"> "Left" </string>
+		<resource name="8/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="8/tex_offset"> 0, 0 </vector2>
+		<resource name="8/material"></resource>		<rect2 name="8/region"> 64, 64, 64, 64 </rect2>
+		<vector2 name="8/occluder_offset"> 32, 32 </vector2>
+		<resource name="8/occluder"></resource>		<vector2 name="8/navigation_offset"> 32, 32 </vector2>
+		<resource name="8/navigation"></resource>		<vector2 name="8/shape_offset"> 32, 32 </vector2>
+		<array name="8/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://13">  </resource>
+		</array>
+		<string name="9/name"> "Middle" </string>
+		<resource name="9/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="9/tex_offset"> 0, 0 </vector2>
+		<resource name="9/material"></resource>		<rect2 name="9/region"> 128, 64, 64, 64 </rect2>
+		<vector2 name="9/occluder_offset"> 32, 32 </vector2>
+		<resource name="9/occluder"></resource>		<vector2 name="9/navigation_offset"> 32, 32 </vector2>
+		<resource name="9/navigation"></resource>		<vector2 name="9/shape_offset"> 32, 32 </vector2>
+		<array name="9/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://14">  </resource>
+		</array>
+		<string name="10/name"> "Full3" </string>
+		<resource name="10/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="10/tex_offset"> 0, 0 </vector2>
+		<resource name="10/material"></resource>		<rect2 name="10/region"> 192, 64, 64, 64 </rect2>
+		<vector2 name="10/occluder_offset"> 32, 32 </vector2>
+		<resource name="10/occluder"></resource>		<vector2 name="10/navigation_offset"> 32, 32 </vector2>
+		<resource name="10/navigation"></resource>		<vector2 name="10/shape_offset"> 32, 32 </vector2>
+		<array name="10/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://3">  </resource>
+		</array>
+		<string name="11/name"> "Middle2" </string>
+		<resource name="11/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="11/tex_offset"> 0, 0 </vector2>
+		<resource name="11/material"></resource>		<rect2 name="11/region"> 256, 64, 64, 64 </rect2>
+		<vector2 name="11/occluder_offset"> 32, 32 </vector2>
+		<resource name="11/occluder"></resource>		<vector2 name="11/navigation_offset"> 32, 32 </vector2>
+		<resource name="11/navigation"></resource>		<vector2 name="11/shape_offset"> 32, 32 </vector2>
+		<array name="11/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://4">  </resource>
+		</array>
+		<string name="12/name"> "Middle3" </string>
+		<resource name="12/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="12/tex_offset"> 0, 0 </vector2>
+		<resource name="12/material"></resource>		<rect2 name="12/region"> 320, 64, 64, 64 </rect2>
+		<vector2 name="12/occluder_offset"> 32, 32 </vector2>
+		<resource name="12/occluder"></resource>		<vector2 name="12/navigation_offset"> 32, 32 </vector2>
+		<resource name="12/navigation"></resource>		<vector2 name="12/shape_offset"> 32, 32 </vector2>
+		<array name="12/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://5">  </resource>
+		</array>
+		<string name="13/name"> "Full4" </string>
+		<resource name="13/texture" resource_type="Texture" path="res://scn/tileset/joe-rocks.png">  </resource>
+		<vector2 name="13/tex_offset"> 0, 0 </vector2>
+		<resource name="13/material"></resource>		<rect2 name="13/region"> 384, 64, 64, 64 </rect2>
+		<vector2 name="13/occluder_offset"> 32, 32 </vector2>
+		<resource name="13/occluder"></resource>		<vector2 name="13/navigation_offset"> 32, 32 </vector2>
+		<resource name="13/navigation"></resource>		<vector2 name="13/shape_offset"> 32, 32 </vector2>
+		<array name="13/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://6">  </resource>
+		</array>
+
+	</main_resource>
+</resource_file>
