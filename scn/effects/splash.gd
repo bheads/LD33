@@ -3,7 +3,7 @@ extends Node2D
 
 
 func _ready():
-	print("starting: ", get_global_pos(), "  p: ", get_parent().get_name())
+	#print("starting: ", get_global_pos(), "  p: ", get_parent().get_name())
 	
 	get_child(0).set_emit_timeout(get_child(0).get_lifetime())
 	get_child(0).set_emitting(true)
@@ -21,4 +21,4 @@ func _ready():
 
 func _on_Timer_timeout():
 	self.queue_free()
-	print("removing")
+	#print("removing")

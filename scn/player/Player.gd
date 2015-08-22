@@ -42,17 +42,17 @@ func _process(delta):
 		set_linear_velocity(Vector2(v.x, v.y / 2)) # hitting the water slows you down
 		# Create spash effect
 		if(abs(v.y) >= 50):
-			print("Splash!")
+			#print("Splash!")
 			var s = eSplash.instance()
 			s.show()
 			s.set_global_pos(Vector2(get_global_pos().x, 10))
 			get_parent().add_child(s)
-		print("swimming mode")
+		#print("swimming mode")
 	elif(inTheAir != 1 && get_global_pos().y <= 0):
 		set_gravity_scale(10)
 		set_friction(1)
 		inTheAir = 1
-		print("flying mode")
+		#print("flying mode")
 
 	
 	# rotate to face the mouse
@@ -97,5 +97,4 @@ func _process(delta):
 		set_linear_velocity(nv) 
 	
 	#print(get_linear_velocity())
-
 
