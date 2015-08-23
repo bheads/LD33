@@ -36,7 +36,7 @@ func _input(ev):
 	
 	# update this for leveling up
 func updateSize():
-	get_node("Sprite").set_scale(Vector2(scale, scale))
+	#get_node("Sprite").set_scale(Vector2(scale, scale))
 
 	get_node("anim/body").set_scale(Vector2(scale, scale))
 	#get_node("anim/body/flipper").set_scale(Vector2(scale, scale))
@@ -82,13 +82,13 @@ func _process(delta):
 		angle += 360
 	set_rot(deg2rad(angle))
 	if(90 < angle && angle < 270):
-		get_node("Sprite").set_flip_v(true)
+		#get_node("Sprite").set_flip_v(true)
 		get_node("anim/body").set_flip_v(true)
 		get_node("anim/body/flipper").set_flip_v(true)
 		get_node("anim/body/tail").set_flip_v(true)
 		get_node("anim/body/mouth").set_flip_v(true)
 	else:
-		get_node("Sprite").set_flip_v(false)
+		#get_node("Sprite").set_flip_v(false)
 		get_node("anim/body").set_flip_v(false)
 		get_node("anim/body/flipper").set_flip_v(false)
 		get_node("anim/body/tail").set_flip_v(false)

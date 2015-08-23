@@ -15,6 +15,8 @@ var health
 var maxHealth
 export(float) var speed = 50
 export(float) var maxspeed = 1000
+export(int, "Left","Right") var direction
+var timeToFlip
 
 func _ready():
 	randomize()
@@ -34,7 +36,14 @@ func _ready():
 		health = 90
 		height = 140
 		mass = 3000
-
+	
+	if(direction==0):
+		get_child(0).set_flip_h(true)
+		speed = -abs(speed)
+	else:
+	
+		speed = abs(speed)
+		
 	set_mass(mass)
 	maxHealth = health
 	get_node("HealthBG").set_scale(Vector2(0, 0.4))
