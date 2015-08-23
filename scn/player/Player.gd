@@ -6,19 +6,23 @@ var maxAccel = 100
 var waterFriction = 10
 var scale = 0.4
 var eSplash
+var eNom
 var extents
 
 
 var jBubble
+var anim
 
 
 func _ready():
 	set_process(true)
 	set_process_input(true)
 	eSplash = load("res://scn/effects/splash.scn")
+	eNom = load("res://scn/effects/nom.scn")
 	jBubble = load("res://scn/junk/bub.scn")
 	extents = get_shape(0).get_extents()
 	updateSize()
+	anim = get_node("anim/AnimationPlayer")
 	
 func _input(ev):
 	if(ev.type == InputEvent.KEY && ev.scancode == KEY_G):
@@ -32,9 +36,15 @@ func _input(ev):
 	# update this for leveling up
 func updateSize():
 	get_node("Sprite").set_scale(Vector2(scale, scale))
+
+	get_node("anim/body").set_scale(Vector2(scale, scale))
+	#get_node("anim/body/flipper").set_scale(Vector2(scale, scale))
+	#get_node("anim/body/tail").set_scale(Vector2(scale, scale))
+	
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
 	set_mass(scale * 150)
 	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
+	get_node("eat_zone").get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 
 func _process(delta):
 	# simple floating
@@ -72,10 +82,44 @@ func _process(delta):
 	set_rot(deg2rad(angle))
 	if(90 < angle && angle < 270):
 		get_node("Sprite").set_flip_v(true)
+		get_node("anim/body").set_flip_v(true)
+		get_node("anim/body/flipper").set_flip_v(true)
+		get_node("anim/body/tail").set_flip_v(true)
+		get_node("anim/body/mouth").set_flip_v(true)
 	else:
 		get_node("Sprite").set_flip_v(false)
+		get_node("anim/body").set_flip_v(false)
+		get_node("anim/body/flipper").set_flip_v(false)
+		get_node("anim/body/tail").set_flip_v(false)
+		get_node("anim/body/mouth").set_flip_v(false)
+
+
+	var mOpen = false 
+	if(Input.get_mouse_button_mask() & 2):
+		mOpen = true
+
+	#animation
+	if(Input.get_mouse_button_mask() & 1):
+		if(mOpen):
+			if(anim.get_current_animation() != "swim_open"):
+				anim.stop()
+				anim.play("swim_open")
+		else:
+			if(anim.get_current_animation() != "swim_closed"):
+				anim.stop()
+				anim.play("swim_closed")
+	else:
+		if(mOpen):
+			if(anim.get_current_animation() != "rest_open"):
+				anim.stop()
+				anim.play("rest_open")
+		else:
+			if(anim.get_current_animation() != "rest_closed"):
+				anim.stop()
+				anim.play("rest_closed")
 
 	
+		
 
 	# acceleration
 	var v = get_linear_velocity()
@@ -114,3 +158,11 @@ func _process(delta):
 	
 	#print(get_linear_velocity())
 
+func _on_eat_zone_body_enter( body ):
+	if(body.is_in_group("food") && Input.get_mouse_button_mask() & 2):
+		# eating effect
+		var s = eNom.instance()
+		s.show()
+		s.set_global_pos(Vector2(get_global_pos().x, 10))
+		get_parent().add_child(s)
+		body.queue_free()

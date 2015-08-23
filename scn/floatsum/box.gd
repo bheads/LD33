@@ -11,6 +11,7 @@ func _ready():
 	set_mass(100 + randf() * 190)
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
+	add_to_group("food")
 	# find a way to scale the splash
 	# todo: set the image to one of several random box type floatsum
 	
@@ -63,7 +64,7 @@ func _integrate_forces(state):
 		var dX = abs(lv.x - v.x)
 		var dY = abs(lv.y - v.y)
 		var f = (dX + dY) / 500
-		print(f)
+		#print(f)
 		if(f > 1.5):
 			var s = eExploder.instance()
 			s.show()

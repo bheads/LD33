@@ -18,7 +18,8 @@ func _ready():
 	get_child(2).set_emitting(true)
 	get_child(2).pre_process(4)
 	
-	get_node("SamplePlayer2D").play("splash", false)
+	var v = get_node("SamplePlayer2D").play("splash", false)
+	get_node("SamplePlayer2D").voice_set_volume_scale_db(v, 0.1)
 	set_fixed_process(true)
 
 func _fixed_process(delta):
