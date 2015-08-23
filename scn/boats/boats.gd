@@ -14,7 +14,7 @@ var sBox
 export(float) var health = 30
 
 export(int, "RowBoat", "Scooner") var boat_type
-
+var mass
 
 var maxHealth
 
@@ -25,14 +25,16 @@ func _ready():
 	set_process(true)
 	# create the boat object to display and use
 	var s
-	if(boat_type=="RowBoat"):
-		set_mass(600)
-		health = 15;
+	
+	if(boat_type==0):
+		health = 15
 		s = load("res://scn/boats/row_boat.scn").instance()
-	if(boat_type=="Scooner"):
-		set_mass(3000)
-		health = 90;
+		mass = 600
+	if(boat_type==1):
+		health = 90
 		s = load("res://scn/boats/scooner.scn").instance()
+		mass = 3000
+	set_mass(mass)
 	add_child(s)
 	maxHealth = health	
 	
@@ -61,10 +63,10 @@ func _process(delta):
 		var nv = Vector2()
 		var xFrict = max(abs(v.x / 3), 40)
 		var yFrict = max(abs(v.y / 5), 40)
-	if(1 < v.x):
+		if(1 < v.x):
 			nv.x = v.x - (xFrict * delta)
-	if(v.x < -1):
-		nv.x = v.x + (xFrict * delta)
+		if(v.x < -1):
+			nv.x = v.x + (xFrict * delta)
 		if(-1 <= v.x && v.x <= 1):
 			nv.x = 0
 		
