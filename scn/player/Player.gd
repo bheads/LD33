@@ -10,6 +10,7 @@ var extents
 
 
 var jBubble
+var anim
 
 
 func _ready():
@@ -19,6 +20,7 @@ func _ready():
 	jBubble = load("res://scn/junk/bub.scn")
 	extents = get_shape(0).get_extents()
 	updateSize()
+	anim = get_node("anim/AnimationPlayer")
 	
 func _input(ev):
 	if(ev.type == InputEvent.KEY && ev.scancode == KEY_G):
@@ -32,6 +34,11 @@ func _input(ev):
 	# update this for leveling up
 func updateSize():
 	get_node("Sprite").set_scale(Vector2(scale, scale))
+
+	get_node("anim/body").set_scale(Vector2(scale, scale))
+	#get_node("anim/body/flipper").set_scale(Vector2(scale, scale))
+	#get_node("anim/body/tail").set_scale(Vector2(scale, scale))
+	
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
 	set_mass(scale * 150)
 	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
@@ -72,10 +79,26 @@ func _process(delta):
 	set_rot(deg2rad(angle))
 	if(90 < angle && angle < 270):
 		get_node("Sprite").set_flip_v(true)
+		get_node("anim/body").set_flip_v(true)
+		get_node("anim/body/flipper").set_flip_v(true)
+		get_node("anim/body/tail").set_flip_v(true)
 	else:
 		get_node("Sprite").set_flip_v(false)
+		get_node("anim/body").set_flip_v(false)
+		get_node("anim/body/flipper").set_flip_v(false)
+		get_node("anim/body/tail").set_flip_v(false)
 
-	
+
+	#animation
+	if(Input.get_mouse_button_mask() & 1):
+		if(anim.get_current_animation() != "swim"):
+			anim.stop()
+			anim.play("swim")
+	else:
+		if(anim.get_current_animation() != "Rest"):
+			anim.stop()
+			anim.play("Rest")
+			
 
 	# acceleration
 	var v = get_linear_velocity()

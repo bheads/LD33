@@ -63,7 +63,7 @@ func _integrate_forces(state):
 		var dX = abs(lv.x - v.x)
 		var dY = abs(lv.y - v.y)
 		var f = (dX + dY) / 500
-		print(f)
+		#print(f)
 		if(f > 1.5):
 			var s = eExploder.instance()
 			s.show()
