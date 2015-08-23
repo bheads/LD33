@@ -36,10 +36,6 @@ func _ready():
 		s = load("res://scn/boats/scooner.scn").instance()
 		height = 140
 		mass = 3000
-
-	#height = s.get_child(0).get_viewport_rect().size.y
-	
-	
 	set_mass(mass)
 	add_child(s)
 	maxHealth = health	
