@@ -11,6 +11,7 @@ func _ready():
 	set_mass(100 + randf() * 190)
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
+	add_to_group("food")
 	# find a way to scale the splash
 	# todo: set the image to one of several random box type floatsum
 	
