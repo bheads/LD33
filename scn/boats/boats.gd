@@ -25,20 +25,28 @@ func _ready():
 	set_process(true)
 	# create the boat object to display and use
 	var s
-	
+	var height = 0
 	if(boat_type==0):
 		health = 15
 		s = load("res://scn/boats/row_boat.scn").instance()
 		mass = 600
+		height= 30
 	if(boat_type==1):
 		health = 90
 		s = load("res://scn/boats/scooner.scn").instance()
+		height = 140
 		mass = 3000
+
+	#height = s.get_child(0).get_viewport_rect().size.y
+	
+	
 	set_mass(mass)
 	add_child(s)
 	maxHealth = health	
 	
 	get_node("Health").set_scale(Vector2(20 * (health / maxHealth), 0.4))
+	get_node("Health").set_pos(Vector2(0, -height))
+	get_node("HealthBg").set_pos(Vector2(0, -height))
 
 func _process(delta):
 	var p = get_global_pos()
