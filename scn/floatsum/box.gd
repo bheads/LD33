@@ -5,23 +5,27 @@ var inTheAir = -1
 var grav = 2
 var eSplash
 var eExploder
+export(float) var inv = 3
 
 func _ready():
 	randomize()
 	var divSprite = get_node("Sprite").get_texture().get_height()/16
 	get_node("Sprite").set_region_rect(Rect2(0,16*(randi()%divSprite),16,16))
-	set_process(true)
+	set_fixed_process(true)
 	set_mass(100 + randf() * 190)
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
 	add_to_group("food")
 	# find a way to scale the splash
-	# todo: set the image to one of several random box type floatsum
 	
 	
-func _process(delta):
+func _fixed_process(delta):
 	var p = get_global_pos()
 	var v = get_linear_velocity()
+	
+	# count down till this box can be destryed
+	if(inv > 0):
+		inv -= delta
 	
 	# splash
 	if(inTheAir != 0 && p.y > 0):
@@ -57,9 +61,13 @@ func _process(delta):
 		set_linear_velocity(nv) 
 	else:
 		set_gravity_scale(grav)
-	
-	
+
+
 func _integrate_forces(state):
+	# skip till timer ticks down	
+	if(inv >= 0):
+		return
+
 	var lv = get_linear_velocity()
 	for i in range(0, state.get_contact_count()):
 		var obj = state.get_contact_collider_object(i)
@@ -67,7 +75,7 @@ func _integrate_forces(state):
 		var dX = abs(lv.x - v.x)
 		var dY = abs(lv.y - v.y)
 		var f = (dX + dY) / 500
-		#print(f)
+
 		if(f > 1.5):
 			var s = eExploder.instance()
 			s.show()

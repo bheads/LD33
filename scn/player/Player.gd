@@ -24,6 +24,7 @@ func _ready():
 	extents = get_shape(0).get_extents()
 	updateSize()
 	anim = get_node("anim/AnimationPlayer")
+	add_to_group("player")
 	
 func _input(ev):
 	if(ev.type == InputEvent.KEY && ev.scancode == KEY_G):
