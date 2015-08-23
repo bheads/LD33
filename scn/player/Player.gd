@@ -119,8 +119,6 @@ func _process(delta):
 				anim.stop()
 				anim.play("rest_closed")
 
-	
-		
 
 	# acceleration
 	var v = get_linear_velocity()
@@ -128,20 +126,20 @@ func _process(delta):
 		set_linear_velocity(Vector2(v.x + clamp(dX * delta, -maxAccel, maxAccel), v.y + clamp(-dY * delta, -maxAccel, maxAccel)))
 	elif(inTheAir == 0): # water friction
 		var nv = Vector2()
-		var xFrict = max(abs(v.x / 3), 10)
-		var yFrict = max(abs(v.y / 2), 10)
+		var xFrict = max(abs(v.x * 0.95), 10)
+		var yFrict = max(abs(v.y * 0.95), 10)
 		if(1 < v.x):
 			nv.x = v.x - (xFrict * delta)
 		if(v.x < -1):
 			nv.x = v.x + (xFrict * delta)
-		if(-1 <= v.x && v.x <= 1):
+		if(-4 <= v.x && v.x <= 4):
 			nv.x = 0
 		
 		if(1 < v.y):
 			nv.y = v.y - (yFrict * delta)
 		if(v.y < -1):
 			nv.y = v.y + (yFrict * delta)
-		if(-1 < v.y && v.y <= 1):
+		if(-4 < v.y && v.y <= 4):
 			nv.y = 0
 		set_linear_velocity(nv) 
 	
