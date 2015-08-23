@@ -8,7 +8,8 @@ var eExploder
 
 func _ready():
 	randomize()
-	get_node("Sprite").set_region_rect(Rect2(0,16*(randi()%2),16,16))
+	var divSprite = get_node("Sprite").get_texture().get_height()/16
+	get_node("Sprite").set_region_rect(Rect2(0,16*(randi()%divSprite),16,16))
 	set_process(true)
 	set_mass(100 + randf() * 190)
 	eSplash = load("res://scn/effects/splash.scn")
