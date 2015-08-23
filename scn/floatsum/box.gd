@@ -16,6 +16,7 @@ func _ready():
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
 	add_to_group("food")
+	add_to_group("big food")
 	# find a way to scale the splash
 	
 	
@@ -34,6 +35,7 @@ func _fixed_process(delta):
 			var s = eSplash.instance()
 			s.show()
 			s.set_global_pos(Vector2(p.x, 10))
+			s.set_scale(Vector2(0.5, 0.5))
 			get_tree().get_root().get_node("World").add_child(s)
 	elif(inTheAir != 1 && get_global_pos().y <= 0):
 		inTheAir = 1

@@ -16,7 +16,7 @@ var anim
 
 func _ready():
 	randomize()
-	set_process(true)
+	set_fixed_process(true)
 	set_process_input(true)
 	eSplash = load("res://scn/effects/splash.scn")
 	eNom = load("res://scn/effects/nom.scn")
@@ -33,22 +33,15 @@ func _input(ev):
 	if(ev.type == InputEvent.KEY && ev.scancode == KEY_S):
 		scale = clamp(scale - 0.05, 0.4, 2)
 		updateSize()
-	
-	
-	# update this for leveling up
-func updateSize():
-	#get_node("Sprite").set_scale(Vector2(scale, scale))
 
+func updateSize():
 	get_node("anim/body").set_scale(Vector2(scale, scale))
-	#get_node("anim/body/flipper").set_scale(Vector2(scale, scale))
-	#get_node("anim/body/tail").set_scale(Vector2(scale, scale))
-	
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
 	set_mass(scale * 150)
 	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 	get_node("eat_zone").get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 
-func _process(delta):
+func _fixed_process(delta):
 	# simple floating
 	if(inTheAir != 0 && get_global_pos().y > 0):
 		set_gravity_scale(0)
@@ -62,6 +55,7 @@ func _process(delta):
 			var s = eSplash.instance()
 			s.show()
 			s.set_global_pos(Vector2(get_global_pos().x, 10))
+			s.set_scale(Vector2(scale + 1, scale + 1))
 			get_parent().add_child(s)
 		#print("swimming mode")
 	elif(inTheAir != 1 && get_global_pos().y <= 0):
@@ -160,6 +154,12 @@ func _process(delta):
 
 func _on_eat_zone_body_enter( body ):
 	if(body.is_in_group("food") && Input.get_mouse_button_mask() & 2):
+		var worth = 1.6 / 200
+		if(body.is_in_group("big food")):
+			worth *= 4
+		# get points for eating
+		scale = clamp(scale + worth, 0.4, 2)
+		updateSize()
 		# eating effect
 		var s = eNom.instance()
 		s.show()

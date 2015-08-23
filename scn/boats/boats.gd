@@ -46,7 +46,7 @@ func _ready():
 		
 	set_mass(mass)
 	maxHealth = health
-	get_node("HealthBG").set_scale(Vector2(0, 0.4))
+	get_node("HealthBG").set_scale(Vector2(20, 0.4))
 	get_node("Health").set_scale(Vector2(20 * (health / maxHealth), 0.4))
 	get_node("Health").set_pos(Vector2(0, -height))
 	get_node("HealthBG").set_pos(Vector2(0, -height))
