@@ -13,14 +13,16 @@ var grav = 2
 var mass
 var health
 var maxHealth
+export(float) var speed = 50
+export(float) var maxspeed = 1000
 
 func _ready():
 	randomize()
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
 	sBox = load("res://scn/floatsum/box1.scn")
-	set_process(true)
 
+	set_fixed_process(true)
 	print(get_shape_count())
 		# create the boat object to display and use
 	var height = 0
@@ -35,13 +37,12 @@ func _ready():
 
 	set_mass(mass)
 	maxHealth = health
-
 	get_node("HealthBG").set_scale(Vector2(0, 0.4))
 	get_node("Health").set_scale(Vector2(20 * (health / maxHealth), 0.4))
 	get_node("Health").set_pos(Vector2(0, -height))
 	get_node("HealthBG").set_pos(Vector2(0, -height))
-
-func _process(delta):
+	
+func _fixed_process(delta):
 	var p = get_global_pos()
 	var v = get_linear_velocity()
 	
@@ -57,6 +58,8 @@ func _process(delta):
 		inTheAir = 1
 
 
+
+	
 	if(p.y > 0.01):
 		# in the water
 		set_gravity_scale(-grav * 2)
@@ -89,6 +92,13 @@ func _process(delta):
 				set_rot(max(r - 0.3 * delta, 0))
 			elif(r < 0):
 				set_rot(min(r + 0.3 * delta, 0))
+			elif(p.y < 0.5 && abs(nv.y) < speed ):
+				#speed is pixels per second
+				#delta time in seconds since function last call
+				nv.x=clamp(nv.x+speed*delta, -maxspeed, maxspeed)
+				set_linear_velocity(nv)
+				
+				
 		elif(av < 0):
 			set_angular_velocity(min(av + 0.3 * delta, 0))
 		elif(av > 0):
@@ -97,7 +107,7 @@ func _process(delta):
 		
 	else:
 		set_gravity_scale(grav)
-		
+	
 func _integrate_forces(state):
 	var lv = get_linear_velocity()
 	for i in range(0, state.get_contact_count()):
