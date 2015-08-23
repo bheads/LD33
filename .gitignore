@@ -1,2 +1,3 @@
 .fscache
 .fscache.tmp
+*.tmp

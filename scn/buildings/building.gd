@@ -4,13 +4,13 @@ extends Area2D
 var eExploder
 var sBox
 
-export(int) var health = 30
+export(int) var health
 var maxHealth
 
-export(int) var minLoot = 0
-export(int) var maxLoot = 5
+export(int) var minLoot
+export(int) var maxLoot
 
-export(float) var hMeter = 100
+export(float) var hMeter
 
 
 func _ready():
