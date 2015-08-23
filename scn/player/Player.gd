@@ -15,6 +15,7 @@ var anim
 
 
 func _ready():
+	randomize()
 	set_process(true)
 	set_process_input(true)
 	eSplash = load("res://scn/effects/splash.scn")
@@ -163,6 +164,6 @@ func _on_eat_zone_body_enter( body ):
 		# eating effect
 		var s = eNom.instance()
 		s.show()
-		s.set_global_pos(Vector2(get_global_pos().x, 10))
+		s.set_global_pos(get_global_pos())
 		get_parent().add_child(s)
 		body.queue_free()

@@ -1,10 +1,11 @@
 
 extends Node2D
 
-var life = 3
+var life = 5
 
 
 func _ready():
+	get_node("Particles2D").pre_process(2.9)
 	set_fixed_process(true)
 
 
