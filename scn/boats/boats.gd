@@ -1,48 +1,45 @@
 
 extends Node2D
 
-# member variables here, example:
-# var a=2
-# var b="textvar"
 
-var inTheAir = -1
-var grav = 2
+export(int, "RowBoat", "Scooner") var boat_type
+
 var eSplash
 var eExploder
 var sBox
 
-export(float) var health = 30
-
-export(int, "RowBoat", "Scooner") var boat_type
+var inTheAir = -1
+var grav = 2
 var mass
-
+var health
 var maxHealth
 
 func _ready():
+	randomize()
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
 	sBox = load("res://scn/floatsum/box1.scn")
 	set_process(true)
-	# create the boat object to display and use
-	var s
+
+	print(get_shape_count())
+		# create the boat object to display and use
 	var height = 0
 	if(boat_type==0):
 		health = 15
-		s = load("res://scn/boats/row_boat.scn").instance()
 		mass = 600
 		height= 30
-	if(boat_type==1):
+	else:
 		health = 90
-		s = load("res://scn/boats/scooner.scn").instance()
 		height = 140
 		mass = 3000
+
 	set_mass(mass)
-	add_child(s)
-	maxHealth = health	
-	
+	maxHealth = health
+
+	get_node("HealthBG").set_scale(Vector2(0, 0.4))
 	get_node("Health").set_scale(Vector2(20 * (health / maxHealth), 0.4))
 	get_node("Health").set_pos(Vector2(0, -height))
-	get_node("HealthBg").set_pos(Vector2(0, -height))
+	get_node("HealthBG").set_pos(Vector2(0, -height))
 
 func _process(delta):
 	var p = get_global_pos()
@@ -126,6 +123,7 @@ func _integrate_forces(state):
 				return
 				
 func spawnBox():
+	randomize()
 	var p = get_global_pos()
 
 	var s = sBox.instance()
