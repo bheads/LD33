@@ -7,6 +7,8 @@ export(int, "RowBoat", "Scooner") var boat_type
 var eSplash
 var eExploder
 var sBox
+var sAmmo
+
 
 var inTheAir = -1
 var grav = 2
@@ -19,13 +21,20 @@ export(int, "Left","Right") var direction
 export(float) var timeToFlip = 8
 var timeToFlip_o
 
+export(float) var fireTime = 2
+var fireTime_o
+
 func _ready():
 	randomize()
+	add_to_group("boat")
 	eSplash = load("res://scn/effects/splash.scn")
 	eExploder = load("res://scn/effects/expl1.scn")
 	sBox = load("res://scn/floatsum/box1.scn")
+	sAmmo = load("res://scn/ammo/cannon.scn")
 
 	timeToFlip_o = timeToFlip
+	fireTime_o = fireTime
+	
 	set_fixed_process(true)
 	print(get_shape_count())
 		# create the boat object to display and use
@@ -38,9 +47,7 @@ func _ready():
 		health = 90
 		height = 140
 		mass = 3000
-	
-	
-		
+
 	set_mass(mass)
 	maxHealth = health
 	get_node("HealthBG").set_scale(Vector2(20, 0.4))
@@ -122,10 +129,26 @@ func _fixed_process(delta):
 	else:
 		set_gravity_scale(grav)
 	
+	fireTime -= delta
+	if(fireTime <=0):
+		fire()
+		
+func fire():
+	fireTime = fireTime_o
+	var p = get_global_pos()
+	var s = sAmmo.instance()
+	s.show()
+	s.set_global_pos(Vector2(p.x, p.y))
+	s.set_linear_velocity(Vector2(1000, -45))
+	get_tree().get_root().get_node("World").add_child(s)
+	pass
+	
 func _integrate_forces(state):
 	var lv = get_linear_velocity()
 	for i in range(0, state.get_contact_count()):
 		var obj = state.get_contact_collider_object(i)
+		if(obj.is_in_group("ammo")):
+			continue
 		var v = state.get_contact_collider_velocity_at_pos(i)
 		var dX = abs(lv.x - v.x)
 		var dY = abs(lv.y - v.y)
@@ -149,7 +172,6 @@ func _integrate_forces(state):
 func spawnBox():
 	randomize()
 	var p = get_global_pos()
-
 	var s = sBox.instance()
 	s.show()
 	s.set_global_pos(Vector2(p.x, p.y))

@@ -73,6 +73,9 @@ func _integrate_forces(state):
 	var lv = get_linear_velocity()
 	for i in range(0, state.get_contact_count()):
 		var obj = state.get_contact_collider_object(i)
+		if(obj.is_in_group("ammo")):
+			continue
+
 		var v = state.get_contact_collider_velocity_at_pos(i)
 		var dX = abs(lv.x - v.x)
 		var dY = abs(lv.y - v.y)
