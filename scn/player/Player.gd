@@ -7,8 +7,6 @@ var waterFriction = 10
 var scale = 0.4
 var eSplash
 var eNom
-var extents
-
 
 var jBubble
 var anim
@@ -24,7 +22,6 @@ func _ready():
 	eSplash = load("res://scn/effects/splash.scn")
 	eNom = load("res://scn/effects/nom.scn")
 	jBubble = load("res://scn/junk/bub.scn")
-	extents = get_shape(0).get_extents()
 	updateSize()
 	anim = get_node("anim/AnimationPlayer")
 	add_to_group("player")
@@ -45,8 +42,7 @@ func updateSize():
 
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
 	set_mass(scale * 1000)
-	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
-	get_node("eat_zone").get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
+	#get_node("eat_zone").get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 
 func _fixed_process(delta):
 	# simple floating
