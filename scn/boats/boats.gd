@@ -21,7 +21,7 @@ export(int, "Left","Right") var direction
 export(float) var timeToFlip = 8
 var timeToFlip_o
 
-export(float) var fireTime = 2
+export(float) var fireTime = 8
 var fireTime_o
 
 func _ready():
@@ -139,10 +139,17 @@ func fire():
 	var s = sAmmo.instance()
 	s.show()
 	s.set_global_pos(Vector2(p.x, p.y))
-	s.set_linear_velocity(Vector2(1000, -45))
+	s.set_linear_velocity(Vector2(rand_range(200, 1000), rand_range(-45, -100)))
 	get_tree().get_root().get_node("World").add_child(s)
-	pass
 	
+	
+	var s2 = sAmmo.instance()
+	s2.show()
+	s2.set_global_pos(Vector2(p.x, p.y))
+	s2.set_linear_velocity(Vector2(-rand_range(200, 1000), rand_range(-45, -100)))
+	get_tree().get_root().get_node("World").add_child(s2)
+
+
 func _integrate_forces(state):
 	var lv = get_linear_velocity()
 	for i in range(0, state.get_contact_count()):
