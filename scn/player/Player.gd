@@ -12,6 +12,8 @@ var extents
 
 var jBubble
 var anim
+var mOpen = false
+var isRest = true
 
 
 func _ready():
@@ -77,42 +79,44 @@ func _fixed_process(delta):
 		angle += 360
 	set_rot(deg2rad(angle))
 	if(90 < angle && angle < 270):
-		#get_node("Sprite").set_flip_v(true)
 		get_node("anim/body").set_flip_v(true)
-		get_node("anim/body/flipper").set_flip_v(true)
+		get_node("anim/body/fin").set_flip_v(true)
+		get_node("anim/body/head").set_flip_v(true)
+		get_node("anim/body/head/jaw").set_flip_v(true)
 		get_node("anim/body/tail").set_flip_v(true)
-		get_node("anim/body/mouth").set_flip_v(true)
+		get_node("anim/body/tail/back_fin").set_flip_v(true)
+		get_node("anim/body/tail/front_fin").set_flip_v(true)
 	else:
-		#get_node("Sprite").set_flip_v(false)
 		get_node("anim/body").set_flip_v(false)
-		get_node("anim/body/flipper").set_flip_v(false)
+		get_node("anim/body").set_flip_v(false)
+		get_node("anim/body/fin").set_flip_v(false)
+		get_node("anim/body/head").set_flip_v(false)
+		get_node("anim/body/head/jaw").set_flip_v(false)
 		get_node("anim/body/tail").set_flip_v(false)
-		get_node("anim/body/mouth").set_flip_v(false)
+		get_node("anim/body/tail/back_fin").set_flip_v(false)
+		get_node("anim/body/tail/front_fin").set_flip_v(false)
 
 
-	var mOpen = false 
+
+	# mouth animation
 	if(Input.get_mouse_button_mask() & 2):
-		mOpen = true
+		if(!mOpen):
+			mOpen = true
+			anim.play("open")
+	else:
+		if(mOpen):
+			mOpen = false
+			anim.play("close")
 
 	#animation
 	if(Input.get_mouse_button_mask() & 1):
-		if(mOpen):
-			if(anim.get_current_animation() != "swim_open"):
-				anim.stop()
-				anim.play("swim_open")
-		else:
-			if(anim.get_current_animation() != "swim_closed"):
-				anim.stop()
-				anim.play("swim_closed")
+		if(isRest):
+			anim.play("swim")
+			isRest = false
 	else:
-		if(mOpen):
-			if(anim.get_current_animation() != "rest_open"):
-				anim.stop()
-				anim.play("rest_open")
-		else:
-			if(anim.get_current_animation() != "rest_closed"):
-				anim.stop()
-				anim.play("rest_closed")
+		if(!isRest):
+			anim.play("rest")
+			isRest = true
 
 
 	# acceleration
