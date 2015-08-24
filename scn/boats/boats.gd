@@ -16,7 +16,8 @@ var maxHealth
 export(float) var speed = 50
 export(float) var maxspeed = 1000
 export(int, "Left","Right") var direction
-var timeToFlip
+export(float) var timeToFlip = 8
+var timeToFlip_o
 
 func _ready():
 	randomize()
@@ -24,6 +25,7 @@ func _ready():
 	eExploder = load("res://scn/effects/expl1.scn")
 	sBox = load("res://scn/floatsum/box1.scn")
 
+	timeToFlip_o = timeToFlip
 	set_fixed_process(true)
 	print(get_shape_count())
 		# create the boat object to display and use
@@ -37,12 +39,7 @@ func _ready():
 		height = 140
 		mass = 3000
 	
-	if(direction==0):
-		get_child(0).set_flip_h(true)
-		speed = -abs(speed)
-	else:
 	
-		speed = abs(speed)
 		
 	set_mass(mass)
 	maxHealth = health
@@ -52,8 +49,16 @@ func _ready():
 	get_node("HealthBG").set_pos(Vector2(0, -height))
 	
 func _fixed_process(delta):
+	timeToFlip -= delta
 	var p = get_global_pos()
 	var v = get_linear_velocity()
+
+	if(direction==0):
+		get_child(0).set_flip_h(true)
+		speed = -abs(speed)
+	else:
+		get_child(0).set_flip_h(false)
+		speed = abs(speed)
 	
 	# splash
 	if(inTheAir != 0 && p.y > 0):
@@ -66,10 +71,8 @@ func _fixed_process(delta):
 	elif(inTheAir != 1 && get_global_pos().y <= 0):
 		inTheAir = 1
 
-
-
 	
-	if(p.y > 0.01):
+	if(p.y >= 0.00):
 		# in the water
 		set_gravity_scale(-grav * 2)
 		# slow down
@@ -89,7 +92,7 @@ func _fixed_process(delta):
 			nv.y = v.y + (yFrict * delta)
 		if(-5 < v.y && v.y <= 5):
 			nv.y = 0
-		set_linear_velocity(nv) 
+		
 		
 		# self righting
 		var r = get_rot()
@@ -101,19 +104,21 @@ func _fixed_process(delta):
 				set_rot(max(r - 0.3 * delta, 0))
 			elif(r < 0):
 				set_rot(min(r + 0.3 * delta, 0))
-			elif(p.y < 0.5 && abs(nv.y) < speed ):
-				#speed is pixels per second
-				#delta time in seconds since function last call
-				nv.x=clamp(nv.x+speed*delta, -maxspeed, maxspeed)
-				set_linear_velocity(nv)
 				
 				
 		elif(av < 0):
 			set_angular_velocity(min(av + 0.3 * delta, 0))
 		elif(av > 0):
 			set_angular_velocity(max(av - 0.3 * delta, 0))
-			
 		
+		if(p.y < 18):
+			nv.x = clamp(nv.x + (speed * delta), -maxspeed, maxspeed)
+			
+		if(timeToFlip <= 0):
+			timeToFlip = timeToFlip_o
+			direction = (direction + 1) % 2
+		
+		set_linear_velocity(nv) 
 	else:
 		set_gravity_scale(grav)
 	
