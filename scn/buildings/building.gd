@@ -32,10 +32,13 @@ func _ready():
 	
 func _fixed_process(delta):
 	fireTime -= delta
-	if(fireTime <=0):
+	if(fireTime_o > 0 && fireTime <=0):
 		fire()
 		
 func fire():
+	if(fireTime_o<=0):
+		return
+		
 	fireTime = fireTime_o
 	var p = get_global_pos()
 	var s = sAmmo.instance()
