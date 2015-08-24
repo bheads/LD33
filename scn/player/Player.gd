@@ -14,6 +14,7 @@ var jBubble
 var anim
 var mOpen = false
 var isRest = true
+var fRight = true
 
 
 func _ready():
@@ -37,9 +38,13 @@ func _input(ev):
 		updateSize()
 
 func updateSize():
-	get_node("anim/body").set_scale(Vector2(scale, scale))
+	if(fRight):
+		get_node("anim").set_scale(Vector2(scale, scale))
+	else:
+		get_node("anim").set_scale(Vector2(scale, -scale))
+
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
-	set_mass(scale * 150)
+	set_mass(scale * 1000)
 	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 	get_node("eat_zone").get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
 
@@ -78,23 +83,30 @@ func _fixed_process(delta):
 	while(angle < 0):
 		angle += 360
 	set_rot(deg2rad(angle))
+	
 	if(90 < angle && angle < 270):
-		get_node("anim/body").set_flip_v(true)
-		get_node("anim/body/fin").set_flip_v(true)
-		get_node("anim/body/head").set_flip_v(true)
-		get_node("anim/body/head/jaw").set_flip_v(true)
-		get_node("anim/body/tail").set_flip_v(true)
-		get_node("anim/body/tail/back_fin").set_flip_v(true)
-		get_node("anim/body/tail/front_fin").set_flip_v(true)
+		if(fRight):
+			fRight = false
+			get_node("anim").set_scale(Vector2(scale, -scale))
+			#get_node("anim/body").set_flip_v(true)
+			#get_node("anim/body/fin").set_flip_v(true)
+			#get_node("anim/body/head").set_flip_v(true)
+			#get_node("anim/body/head/jaw").set_flip_v(true)
+			#get_node("anim/body/tail").set_flip_v(true)
+			#get_node("anim/body/tail/back_fin").set_flip_v(true)
+			#get_node("anim/body/tail/front_fin").set_flip_v(true)
 	else:
-		get_node("anim/body").set_flip_v(false)
-		get_node("anim/body").set_flip_v(false)
-		get_node("anim/body/fin").set_flip_v(false)
-		get_node("anim/body/head").set_flip_v(false)
-		get_node("anim/body/head/jaw").set_flip_v(false)
-		get_node("anim/body/tail").set_flip_v(false)
-		get_node("anim/body/tail/back_fin").set_flip_v(false)
-		get_node("anim/body/tail/front_fin").set_flip_v(false)
+		if(!fRight):
+			fRight = true
+			get_node("anim").set_scale(Vector2(scale, scale))
+			#get_node("anim/body").set_flip_v(false)
+			#get_node("anim/body").set_flip_v(false)
+			#get_node("anim/body/fin").set_flip_v(false)
+			#get_node("anim/body/head").set_flip_v(false)
+			#get_node("anim/body/head/jaw").set_flip_v(false)
+			#get_node("anim/body/tail").set_flip_v(false)
+			#get_node("anim/body/tail/back_fin").set_flip_v(false)
+			#get_node("anim/body/tail/front_fin").set_flip_v(false)
 
 
 
@@ -152,9 +164,6 @@ func _fixed_process(delta):
 			b.bscale = scale
 			b.decay = 0.2 * scale
 			get_parent().add_child(b)
-
-	
-	#print(get_linear_velocity())
 
 func _on_eat_zone_body_enter( body ):
 	if(body.is_in_group("food") && Input.get_mouse_button_mask() & 2):
