@@ -9,11 +9,12 @@ var eSplash
 var eNom
 
 var jBubble
-var anim
 var mOpen = false
 var isRest = true
 var fRight = true
-
+var extents
+var extentsMouth
+var ezPos
 
 func _ready():
 	randomize()
@@ -22,9 +23,12 @@ func _ready():
 	eSplash = load("res://scn/effects/splash.scn")
 	eNom = load("res://scn/effects/nom.scn")
 	jBubble = load("res://scn/junk/bub.scn")
-	updateSize()
-	anim = get_node("anim/AnimationPlayer")
 	add_to_group("player")
+	extents = get_shape(0).get_extents()
+	extentsMouth = get_node("eat_zone").get_shape(0).get_extents()
+	ezPos = get_node("eat_zone").get_pos()
+	print("M: ", extentsMouth)
+	updateSize()
 	
 func _input(ev):
 	if(ev.type == InputEvent.KEY && ev.scancode == KEY_G):
@@ -35,16 +39,21 @@ func _input(ev):
 		updateSize()
 
 func updateSize():
-	if(fRight):
-		get_node("anim").set_scale(Vector2(scale, scale))
-	else:
-		get_node("anim").set_scale(Vector2(scale, -scale))
-
+	get_node("open").set_scale(Vector2(scale, scale))
+	get_node("closed").set_scale(Vector2(scale, scale))
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
 	set_mass(scale * 1000)
-	#get_node("eat_zone").get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
+	get_shape(0).set_extents(Vector2(extents.x * scale, extents.y * scale))
+	var ez = get_node("eat_zone")
+	ez.get_shape(0).set_extents(Vector2(extentsMouth.x * scale, extentsMouth.y * scale))
+	ez.set_pos(Vector2(ezPos.x * scale, ezPos.y))
+	
+	
+#func _draw():
+	
 
 func _fixed_process(delta):
+	#update()
 	# simple floating
 	if(inTheAir != 0 && get_global_pos().y > 0):
 		set_gravity_scale(0)
@@ -83,48 +92,27 @@ func _fixed_process(delta):
 	if(90 < angle && angle < 270):
 		if(fRight):
 			fRight = false
-			get_node("anim").set_scale(Vector2(scale, -scale))
-			#get_node("anim/body").set_flip_v(true)
-			#get_node("anim/body/fin").set_flip_v(true)
-			#get_node("anim/body/head").set_flip_v(true)
-			#get_node("anim/body/head/jaw").set_flip_v(true)
-			#get_node("anim/body/tail").set_flip_v(true)
-			#get_node("anim/body/tail/back_fin").set_flip_v(true)
-			#get_node("anim/body/tail/front_fin").set_flip_v(true)
+			get_node("open").set_flip_v(true)
+			get_node("closed").set_flip_v(true)
 	else:
 		if(!fRight):
 			fRight = true
-			get_node("anim").set_scale(Vector2(scale, scale))
-			#get_node("anim/body").set_flip_v(false)
-			#get_node("anim/body").set_flip_v(false)
-			#get_node("anim/body/fin").set_flip_v(false)
-			#get_node("anim/body/head").set_flip_v(false)
-			#get_node("anim/body/head/jaw").set_flip_v(false)
-			#get_node("anim/body/tail").set_flip_v(false)
-			#get_node("anim/body/tail/back_fin").set_flip_v(false)
-			#get_node("anim/body/tail/front_fin").set_flip_v(false)
-
+			get_node("open").set_flip_v(false)
+			get_node("closed").set_flip_v(false)
 
 
 	# mouth animation
 	if(Input.get_mouse_button_mask() & 2):
 		if(!mOpen):
 			mOpen = true
-			anim.play("open")
+			get_node("open").show()
+			get_node("closed").hide()
 	else:
 		if(mOpen):
 			mOpen = false
-			anim.play("close")
+			get_node("open").hide()
+			get_node("closed").show()
 
-	#animation
-	if(Input.get_mouse_button_mask() & 1):
-		if(isRest):
-			anim.play("swim")
-			isRest = false
-	else:
-		if(!isRest):
-			anim.play("rest")
-			isRest = true
 
 
 	# acceleration
@@ -162,6 +150,7 @@ func _fixed_process(delta):
 			get_parent().add_child(b)
 
 func _on_eat_zone_body_enter( body ):
+	print(body)
 	if(body.is_in_group("food") && Input.get_mouse_button_mask() & 2):
 		var worth = 1.6 / 200
 		if(body.is_in_group("big food")):
@@ -175,3 +164,14 @@ func _on_eat_zone_body_enter( body ):
 		s.set_global_pos(get_global_pos())
 		get_parent().add_child(s)
 		body.queue_free()
+
+
+
+func debug():
+	draw_rect(Rect2(-extents.x * scale, -extents.y * scale, 2 * (extents.x * scale), 2 * (extents.y * scale)), Color(1, 0, 0, 0.5))
+	var p = get_node("eat_zone").get_pos()
+	draw_rect(Rect2(p.x + -extentsMouth.x * scale, p.y + -extentsMouth.y * scale, 2 * (extentsMouth.x * scale), 2 * (extentsMouth.y * scale)), Color(0, 1, 0, 0.5))
+
+#func _draw():
+	#debug()
+	
