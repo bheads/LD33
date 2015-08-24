@@ -151,6 +151,7 @@ func _fixed_process(delta):
 
 func _on_eat_zone_body_enter( body ):
 	print(body)
+	
 	if(body.is_in_group("food") && Input.get_mouse_button_mask() & 2):
 		var worth = 1.6 / 200
 		if(body.is_in_group("big food")):
@@ -164,6 +165,15 @@ func _on_eat_zone_body_enter( body ):
 		s.set_global_pos(get_global_pos())
 		get_parent().add_child(s)
 		body.queue_free()
+
+
+func _integrate_forces(state):
+	for i in range(0, state.get_contact_count()):
+		var obj = state.get_contact_collider_object(i)
+		if(obj.is_in_group("ammo")):
+			var worth = 1.6 / 200
+			scale = clamp(scale - worth, 0.4, 2)
+			updateSize()
 
 
 
