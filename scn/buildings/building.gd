@@ -54,8 +54,15 @@ func fire():
 	s2.set_linear_velocity(Vector2(-rand_range(200, 1000), rand_range(-45, -100)))
 	get_tree().get_root().get_node("World").add_child(s2)
 
+func _body_enter( body ):
+	hit(body)
+	
 func _on_Area2D_body_enter( body ):
+	hit(body)
+
+func hit(body):
 	if(body.is_in_group("player")):
+		print("player hit me!")
 		var v = body.get_linear_velocity()
 		var dX = abs(v.x)
 		var dY = abs(v.y)
@@ -70,7 +77,7 @@ func _on_Area2D_body_enter( body ):
 				s.set_global_pos(get_global_pos())
 				get_tree().get_root().get_node("World").add_child(s)
 				
-				for i in range(minLoot, 1 + randi() % (maxLoot)):
+				for i in range(minLoot, rand_range(minLoot, maxLoot)):
 					spawnBox()
 				
 				get_parent().queue_free()
