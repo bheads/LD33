@@ -40,11 +40,11 @@ func _ready():
 		# create the boat object to display and use
 	var height = 0
 	if(boat_type==0):
-		health = 15
+		health = 12
 		mass = 600
 		height= 30
 	else:
-		health = 90
+		health = 30
 		height = 140
 		mass = 3000
 

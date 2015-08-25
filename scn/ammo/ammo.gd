@@ -1,7 +1,7 @@
 
 extends RigidBody2D
 
-export(float) var life = 45
+export(float) var life = 20
 
 var eSplash
 var eExploder
