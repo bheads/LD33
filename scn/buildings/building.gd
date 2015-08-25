@@ -4,6 +4,8 @@ extends Area2D
 var eExploder
 var sBox
 var sAmmo
+var sRow
+var sScooner
 
 export(int) var health
 var maxHealth
@@ -16,24 +18,53 @@ export(float) var hMeter
 export(float) var fireTime = 8
 var fireTime_o
 
+export(float) var rowSpawner = 0
+var rowSpawner_o = 0
+export(float) var scoonerSpawner = 0
+var scoonerSpawner_o = 0
+export(Vector2) var spawnOffset = Vector2(0, 0)
+
 
 func _ready():
 	randomize()
 	eExploder = load("res://scn/effects/expl1.scn")
 	sBox = load("res://scn/floatsum/box1.scn")
 	sAmmo = load("res://scn/ammo/cannon.scn")
+	sRow = load("res://scn/boats/row_boat.scn")
+	sScooner = load("res://scn/boats/scooner.scn")
+	
 	maxHealth = health
 	get_node("HealthBG").set_scale(Vector2(20, 0.4))
 	get_node("Health").set_scale(Vector2(20 * (health / maxHealth), 0.4))
 	get_node("Health").set_pos(Vector2(0, -hMeter))
 	get_node("HealthBG").set_pos(Vector2(0, -hMeter))
 	fireTime_o = fireTime
+	rowSpawner_o = rowSpawner
+	scoonerSpawner_o = scoonerSpawner
 	set_fixed_process(true)
 	
 func _fixed_process(delta):
+	var p = get_global_pos()
+
 	fireTime -= delta
 	if(fireTime_o > 0 && fireTime <=0):
 		fire()
+		
+	scoonerSpawner -= delta
+	if(scoonerSpawner_o > 0 && scoonerSpawner <=0):
+		scoonerSpawner = scoonerSpawner_o
+		var s = sScooner.instance()
+		s.show()
+		s.set_global_pos(Vector2(p.x + spawnOffset.x, p.y + spawnOffset.y))
+		get_tree().get_root().get_node("World").add_child(s)
+	
+	rowSpawner -= delta
+	if(rowSpawner_o > 0 && rowSpawner <=0):
+		rowSpawner = rowSpawner_o
+		var s = sRow.instance()
+		s.show()
+		s.set_global_pos(Vector2(p.x + spawnOffset.x, p.y + spawnOffset.y))
+		get_tree().get_root().get_node("World").add_child(s)
 		
 func fire():
 	if(fireTime_o<=0):
