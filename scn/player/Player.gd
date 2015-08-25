@@ -39,6 +39,11 @@ func _input(ev):
 		updateSize()
 
 func updateSize():
+	get_node("HealthBG").set_scale(Vector2((20 * scale), 0.4 * scale))
+	get_node("Health").set_scale(Vector2((20 * scale) * ((scale - 0.4) / 1.6), 0.4 * scale))
+	get_node("Health").set_pos(Vector2(0,  -(50 + 50 * scale)))
+	get_node("HealthBG").set_pos(Vector2(0, -(50 + 50 * scale)))
+	
 	get_node("open").set_scale(Vector2(scale, scale))
 	get_node("closed").set_scale(Vector2(scale, scale))
 	get_node("Camera2D").set_zoom(Vector2(clamp(scale * 2, 1.5, 4), clamp(scale * 2, 1.5, 4)))
@@ -94,11 +99,19 @@ func _fixed_process(delta):
 			fRight = false
 			get_node("open").set_flip_v(true)
 			get_node("closed").set_flip_v(true)
+			var p = get_node("Health").get_pos()
+			p.y = abs(p.y)
+			get_node("Health").set_pos(p)
+			get_node("HealthBG").set_pos(p)
 	else:
 		if(!fRight):
 			fRight = true
 			get_node("open").set_flip_v(false)
 			get_node("closed").set_flip_v(false)
+			var p = get_node("Health").get_pos()
+			p.y = -abs(p.y)
+			get_node("Health").set_pos(p)
+			get_node("HealthBG").set_pos(p)
 
 
 	# mouth animation
