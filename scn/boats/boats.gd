@@ -24,6 +24,10 @@ var timeToFlip_o
 export(float) var fireTime = 8
 var fireTime_o
 
+export(Vector2) var hitLoot = Vector2(0, 1)
+export(Vector2) var hitSpawn = Vector2(0, -20)
+
+
 func _ready():
 	randomize()
 	add_to_group("boat")
@@ -170,16 +174,20 @@ func _integrate_forces(state):
 				s.set_global_pos(get_global_pos())
 				get_tree().get_root().get_node("World").add_child(s)
 				
-				for i in range(0, 1 + randi() % 4):
+				for i in range(0, rand_range(0, 5)):
 					spawnBox()
 				
 				self.queue_free()
 				return
+			elif(f > 1):
+				for i in range(hitLoot.x, rand_range(hitLoot.x, hitLoot.y)):
+					spawnBox()
 				
 func spawnBox():
 	randomize()
 	var p = get_global_pos()
 	var s = sBox.instance()
 	s.show()
-	s.set_global_pos(Vector2(p.x, p.y))
+	s.get_child(0).set_linear_velocity(Vector2(rand_range(-4, 4), rand_range(-5, -50)))
+	s.set_global_pos(Vector2(hitSpawn.x + p.x, p.y + hitSpawn.y))
 	get_tree().get_root().get_node("World").add_child(s)
